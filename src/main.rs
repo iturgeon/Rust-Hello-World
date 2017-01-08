@@ -13,15 +13,12 @@ fn main() {
 
         println!("Input a guess.");
 
-        let mut guess = String::new();
+        let guess :u32 = get_input();
 
-        io::stdin().read_line(&mut guess)
-            .expect("Failed to read line");
-
-        let guess: u32 = match guess.trim().parse() {
-            Ok(num) => num,
-            Err(_)  => continue
-        };
+        if guess == 0 {
+            println!("Guesses must be positive integers");
+            continue;
+        }
 
         println!("You Guessed: {}, the secret is {}", guess, secret);
 
@@ -35,4 +32,19 @@ fn main() {
             },
         }
     }
+}
+
+fn get_input() -> u32 {
+
+    let mut guess = String::new();
+
+    io::stdin().read_line(&mut guess)
+        .expect("Failed to read line");
+
+    let guess: u32 = match guess.trim().parse() {
+        Ok(num) => num,
+        Err(_)  => 0
+    };
+
+    return guess;
 }
