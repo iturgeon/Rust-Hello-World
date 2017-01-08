@@ -39,10 +39,15 @@ fn main() {
 }
 
 fn print_guesses(guesses :Vec<u32>) {
-    println!("Here are your {} guesses", guesses.len());
+    let mut print_guesses = String::new();
+
     for f in &guesses {
-        println!("{}", f);
+        print_guesses.push_str(&f.to_string());
+        print_guesses.push_str(", ");
     }
+
+    println!("Here are your {} guesses", guesses.len());
+    println!("{}", print_guesses);
 }
 
 fn get_input() -> u32 {
