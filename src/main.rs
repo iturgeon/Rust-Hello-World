@@ -6,6 +6,7 @@ use std::cmp::Ordering;
 
 fn main() {
     let secret = rand::thread_rng().gen_range(1, 101);
+    let mut guesses: Vec<u32> = vec![];
 
     println!("Guess a number!");
 
@@ -20,6 +21,8 @@ fn main() {
             continue;
         }
 
+        guesses.push(guess);
+
         println!("You Guessed: {}, the secret is {}", guess, secret);
 
 
@@ -28,9 +31,17 @@ fn main() {
             Ordering::Greater => println!("Too big"),
             Ordering::Equal   => {
                 println!("You WIN");
+                print_guesses(guesses);
                 break;
             },
         }
+    }
+}
+
+fn print_guesses(guesses :Vec<u32>) {
+    println!("Here are your {} guesses", guesses.len());
+    for f in &guesses {
+        println!("{}", f);
     }
 }
 
